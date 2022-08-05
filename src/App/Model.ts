@@ -5,10 +5,11 @@ class Model {
     onTodoListChanged: Function;
 
     constructor() {
-        this.todos = [
-            {id: 1, text: 'Run a marathon', complete: false},
-            {id: 2, text: 'Buy bread', complete: false},
-        ];
+        this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('todos', JSON.stringify(this.todos));
+        });
     }
 
     addTodo(todoText: string): void {

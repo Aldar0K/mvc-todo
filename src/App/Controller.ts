@@ -19,6 +19,10 @@ class Controller {
 
         this.onTodoListChanged(this.model.todos);
     }
+    
+    start = (): void => {
+        this.view.render(this.model.todos);
+    }
 
     onTodoListChanged = (todos: ITodo[]): void => {
         this.view.render(todos);
