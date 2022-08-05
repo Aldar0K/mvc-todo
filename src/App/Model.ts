@@ -5,7 +5,11 @@ class Model {
     onTodoListChanged: Function;
 
     constructor() {
-        this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+        if (localStorage.getItem('todos')) {
+            this.todos = JSON.parse(localStorage.getItem('todos') as string);
+        } else {
+            this.todos = [];
+        }
 
         window.addEventListener('beforeunload', () => {
             localStorage.setItem('todos', JSON.stringify(this.todos));
