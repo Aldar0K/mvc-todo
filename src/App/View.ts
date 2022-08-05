@@ -86,8 +86,7 @@ class View {
         }
     }
 
-    // TODO Попробовать интерфейс CallableFunction.
-    bindAddTodo(handler: Function): void {
+    bindAddTodo(handler: CallableFunction): void {
         this.form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -98,7 +97,7 @@ class View {
         });
     }
 
-    bindDeleteTodo(handler: Function): void {
+    bindDeleteTodo(handler: CallableFunction): void {
         this.todoList.addEventListener('click', (e) => {
             const target = e.target as HTMLButtonElement;
             if (target.className === 'delete') {
@@ -109,7 +108,7 @@ class View {
         });
     }
 
-    bindToggleTodo(handler: Function): void {
+    bindToggleTodo(handler: CallableFunction): void {
         this.todoList.addEventListener('change', (e) => {
             const target = e.target as HTMLInputElement;
             if (target.type === 'checkbox') {
