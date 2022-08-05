@@ -101,9 +101,11 @@ class View {
         this.todoList.addEventListener('click', (e) => {
             const target = e.target as HTMLButtonElement;
             if (target.className === 'delete') {
-                const id = parseInt(target.parentElement.id);
+                if (target.parentElement) {
+                    const id = parseInt(target.parentElement.id);
 
-                handler(id);
+                    handler(id);
+                }
             }
         });
     }
@@ -112,9 +114,11 @@ class View {
         this.todoList.addEventListener('change', (e) => {
             const target = e.target as HTMLInputElement;
             if (target.type === 'checkbox') {
-                const id = parseInt(target.parentElement.id);
+                if (target.parentElement) {
+                    const id = parseInt(target.parentElement.id);
 
-                handler(id);
+                    handler(id);
+                }
             }
         });
     }
