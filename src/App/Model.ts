@@ -21,8 +21,7 @@ class Model {
     }
 
     edidTodo(id: number, updatedText: string): void {
-        // this.todos = // Надо ли вообще?!
-        this.todos.map((todo) => todo.id === id
+        this.todos = this.todos.map((todo) => todo.id === id
         ? { id: todo.id, text: updatedText, complete: todo.complete }
         : todo
         );
@@ -33,8 +32,7 @@ class Model {
     }
 
     toggleTodo(id: number): void {
-        // this.todos = // Надо ли вообще?!
-        this.todos.map((todo) => todo.id === id
+        this.todos = this.todos.map((todo) => todo.id === id
         ? { id: todo.id, text: todo.text, complete: !todo.complete }
         : todo
         );
