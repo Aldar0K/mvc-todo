@@ -2,6 +2,7 @@ import ITodo from './Interfaces/ITodo';
 
 class Model {
     todos: ITodo[];
+    onTodoListChanged: Function;
 
     constructor() {
         this.todos = [
@@ -18,6 +19,8 @@ class Model {
         }
 
         this.todos.push(todo);
+
+        this.onTodoListChanged(this.todos);
     }
 
     edidTodo(id: number, updatedText: string): void {
@@ -25,10 +28,14 @@ class Model {
         ? { id: todo.id, text: updatedText, complete: todo.complete }
         : todo
         );
+
+        this.onTodoListChanged(this.todos);
     }
 
     deleteTodo(id: number): void {
         this.todos = this.todos.filter((todo) => todo.id !== id);
+
+        this.onTodoListChanged(this.todos);
     }
 
     toggleTodo(id: number): void {
@@ -36,6 +43,12 @@ class Model {
         ? { id: todo.id, text: todo.text, complete: !todo.complete }
         : todo
         );
+
+        this.onTodoListChanged(this.todos);
+    }
+
+    bindTodoListChanged(callback: Function): void {
+        this.onTodoListChanged = callback;
     }
 }
 

@@ -1,4 +1,4 @@
-export const createElement = (tag: string, className: string): HTMLElement => {
+export const createElement = (tag: string = 'div', className?: string): HTMLElement => {
     const element = document.createElement(tag);
     if (className) element.classList.add(className);
     return element;
