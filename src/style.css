@@ -10,10 +10,12 @@ html {
   color: #444;
 }
 
-#root {
-  max-width: 450px;
+body {
   margin: 2rem auto;
   padding: 0 1rem;
+  max-width: 450px;
+
+  background-color: #dce5e3;
 }
 
 form {
