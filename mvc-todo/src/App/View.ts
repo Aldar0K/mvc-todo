@@ -9,6 +9,8 @@ class View {
     submitButton: HTMLButtonElement;
     todoList: HTMLUListElement;
 
+    private temporaryTodoText: string;
+
     constructor() {
         this.app = getElement('body') as HTMLBodyElement;
 
@@ -29,6 +31,8 @@ class View {
 
         this.form.append(this.input, this.submitButton);
         this.app.append(this.title, this.form, this.todoList);
+
+        this.initLocalListeners();
     }
 
     private get todoText(): string {
@@ -37,6 +41,15 @@ class View {
 
     private resetInput(): void {
         this.input.value = '';
+    }
+
+    private initLocalListeners() {
+        this.todoList.addEventListener(('input'), (e) => {
+            const target = e.target as HTMLSpanElement;
+            if (target.className === 'editable') {
+                this.temporaryTodoText = target.innerText;
+            }
+        });
     }
 
     render(todos: ITodo[]): void {
@@ -121,6 +134,18 @@ class View {
                 }
             }
         });
+    }
+
+    bindEditTodo(handler: CallableFunction): void {
+        this.todoList.addEventListener('focusout', (e) => {
+            const target = e.target as HTMLSpanElement;
+            if (this.temporaryTodoText) {
+                const id = parseInt(target.parentElement.id);
+
+                handler(id, this.temporaryTodoText);
+                this.temporaryTodoText = '';
+            }
+        })
     }
 }
 
